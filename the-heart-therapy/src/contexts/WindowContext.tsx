@@ -83,13 +83,23 @@ const windowReducer = (state: WindowContextState, action: WindowAction): WindowC
         ),
       };
 
-    case 'UPDATE_POSITION':
+    case 'UPDATE_POSITION': {
+      const windowIndex = state.windows.findIndex(w => w.id === action.windowId);
+      if (windowIndex === -1) return state;
+      
+      const window = state.windows[windowIndex];
+      if (window.position.x === action.position.x && window.position.y === action.position.y) {
+        return state; // No change needed
+      }
+      
+      const newWindows = [...state.windows];
+      newWindows[windowIndex] = { ...window, position: action.position };
+      
       return {
         ...state,
-        windows: state.windows.map(w =>
-          w.id === action.windowId ? { ...w, position: action.position } : w
-        ),
+        windows: newWindows,
       };
+    }
 
     case 'MINIMIZE_WINDOW':
       return {

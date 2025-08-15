@@ -4,8 +4,8 @@ import { X, Minus } from 'lucide-react';
 import { cn } from '@/utils/helpers';
 
 interface WindowControlsProps {
-  onClose: () => void;
-  onMinimize?: () => void;
+  onClose: React.MouseEventHandler<HTMLButtonElement>;
+  onMinimize?: React.MouseEventHandler<HTMLButtonElement>;
   showMinimize?: boolean;
 }
 
@@ -15,6 +15,7 @@ export default function WindowControls({ onClose, onMinimize, showMinimize = fal
       {showMinimize && onMinimize && (
         <button
           onClick={onMinimize}
+          onMouseDown={(e) => e.stopPropagation()}
           className={cn(
             'w-6 h-6 rounded-full bg-yellow-400 hover:bg-yellow-500',
             'flex items-center justify-center transition-colors',
@@ -28,6 +29,7 @@ export default function WindowControls({ onClose, onMinimize, showMinimize = fal
       
       <button
         onClick={onClose}
+        onMouseDown={(e) => e.stopPropagation()}
         className={cn(
           'w-6 h-6 rounded-full bg-red-400 hover:bg-red-500',
           'flex items-center justify-center transition-colors',

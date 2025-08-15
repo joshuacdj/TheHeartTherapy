@@ -7,8 +7,8 @@ import { NavigationType } from '@/types/window';
 
 interface WindowHeaderProps {
   title: NavigationType;
-  onClose: () => void;
-  onMinimize?: () => void;
+  onClose: React.MouseEventHandler<HTMLButtonElement>;
+  onMinimize?: React.MouseEventHandler<HTMLButtonElement>;
   onMouseDown?: (e: React.MouseEvent) => void;
   children?: ReactNode;
   className?: string;

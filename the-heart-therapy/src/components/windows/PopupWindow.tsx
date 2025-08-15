@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, ReactNode } from 'react';
+import { ReactNode, useRef, useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import WindowHeader from './WindowHeader';
 import { useDragAndDrop } from '@/hooks/useDragAndDrop';
@@ -14,81 +14,94 @@ interface PopupWindowProps {
   className?: string;
 }
 
-export default function PopupWindow({ window, children, className }: PopupWindowProps) {
+export default function PopupWindow({ window: windowState, children, className }: PopupWindowProps) {
   const { dispatch } = useWindows();
+  const windowRef = useRef<HTMLDivElement>(null);
+  const [constraints, setConstraints] = useState({
+    minX: 0,
+    maxX: 1200,
+    minY: 0,
+    maxY: 800,
+  });
   
-  const { position, isDragging, handleMouseDown, handleMouseMove, handleMouseUp } = useDragAndDrop(
-    window.position,
+  // Set constraints after hydration to avoid SSR mismatch
+  useEffect(() => {
+    const updateConstraints = () => {
+      setConstraints({
+        minX: 0,
+        maxX: window.innerWidth - windowState.size.width,
+        minY: 0,
+        maxY: window.innerHeight - windowState.size.height,
+      });
+    };
+    
+    updateConstraints();
+    window.addEventListener('resize', updateConstraints);
+    return () => window.removeEventListener('resize', updateConstraints);
+  }, [windowState.size.width, windowState.size.height]);
+  
+  const { position, isDragging, handleMouseDown } = useDragAndDrop(
+    windowState.position,
     {
       onDrag: (newPosition) => {
-        dispatch({ type: 'UPDATE_POSITION', windowId: window.id, position: newPosition });
+        dispatch({ type: 'UPDATE_POSITION', windowId: windowState.id, position: newPosition });
       },
       onDragStart: () => {
-        dispatch({ type: 'FOCUS_WINDOW', windowId: window.id });
+        dispatch({ type: 'FOCUS_WINDOW', windowId: windowState.id });
       },
-      constraints: {
-        minX: 0,
-        maxX: typeof globalThis !== 'undefined' && globalThis.innerWidth ? globalThis.innerWidth - window.size.width : 1200,
-        minY: 0,
-        maxY: typeof globalThis !== 'undefined' && globalThis.innerHeight ? globalThis.innerHeight - window.size.height : 800,
-      },
+      constraints,
+      elementRef: windowRef,
     }
   );
 
-  useEffect(() => {
-    if (isDragging) {
-      document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('mouseup', handleMouseUp);
-      return () => {
-        document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('mouseup', handleMouseUp);
-      };
-    }
-  }, [isDragging, handleMouseMove, handleMouseUp]);
-
-  const handleClose = () => {
-    dispatch({ type: 'CLOSE_WINDOW', windowId: window.id });
+  const handleClose: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.preventDefault();
+    dispatch({ type: 'CLOSE_WINDOW', windowId: windowState.id });
   };
 
-  const handleMinimize = () => {
-    dispatch({ type: 'MINIMIZE_WINDOW', windowId: window.id });
+  const handleMinimize: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.preventDefault();
+    dispatch({ type: 'MINIMIZE_WINDOW', windowId: windowState.id });
   };
 
   const handleWindowClick = () => {
-    if (!window.isFocused) {
-      dispatch({ type: 'FOCUS_WINDOW', windowId: window.id });
+    if (!windowState.isFocused) {
+      dispatch({ type: 'FOCUS_WINDOW', windowId: windowState.id });
     }
   };
 
   return (
     <AnimatePresence>
-      {window.isOpen && (
+      {windowState.isOpen && (
         <motion.div
+          ref={windowRef}
+          data-draggable
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ 
-            opacity: window.isMinimized ? 0.3 : 1, 
-            scale: window.isMinimized ? 0.8 : 1 
+            opacity: windowState.isMinimized ? 0.3 : 1, 
+            scale: windowState.isMinimized ? 0.8 : 1 
           }}
           exit={{ opacity: 0, scale: 0.9 }}
           transition={{ duration: 0.2 }}
           className={cn(
             'fixed bg-white rounded-3xl shadow-xl border border-border/10',
-            'backdrop-blur-sm transition-all duration-200',
-            window.isFocused ? 'shadow-2xl' : 'shadow-lg',
-            isDragging && 'cursor-grabbing',
+            'backdrop-blur-sm',
+            windowState.isFocused ? 'shadow-2xl' : 'shadow-lg',
+            isDragging && 'cursor-grabbing select-none',
             className
           )}
           style={{
             left: position.x,
             top: position.y,
-            width: window.size.width,
-            height: window.size.height,
-            zIndex: window.zIndex,
+            width: windowState.size.width,
+            height: windowState.size.height,
+            zIndex: windowState.zIndex,
+            willChange: isDragging ? 'transform' : 'auto',
           }}
           onClick={handleWindowClick}
         >
           <WindowHeader
-            title={window.type}
+            title={windowState.type}
             onClose={handleClose}
             onMinimize={handleMinimize}
             onMouseDown={handleMouseDown}

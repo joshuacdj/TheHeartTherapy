@@ -42,7 +42,7 @@ function HomePage() {
           
           <div className="text-center mt-4">
             <h1 className="text-4xl font-bold text-foreground mb-4">
-              hi! <span className="text-primary">i'm hanyu</span>
+              hi! <span className="text-primary">i&apos;m hanyu</span>
             </h1>
             
             <p className="text-lg text-secondary mb-8">
@@ -124,7 +124,7 @@ function HomePage() {
               }}
             >
               <p className="text-sm text-foreground leading-relaxed mb-2 pr-1">
-                "Thank you for your patience & guidance all this while"
+&ldquo;Thank you for your patience & guidance all this while&rdquo;
               </p>
               <div className="text-right">
                 <span className="text-primary text-xs font-medium">~EZ</span>
