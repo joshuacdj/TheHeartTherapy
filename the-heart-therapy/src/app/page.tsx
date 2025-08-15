@@ -1,8 +1,19 @@
+'use client';
+
 import Image from "next/image";
 import PageContainer from "@/components/layout/PageContainer";
 import ContentCard from "@/components/layout/ContentCard";
+import WindowManager from "@/components/windows/WindowManager";
+import { useWindows, WindowProvider } from "@/contexts/WindowContext";
+import { NavigationType } from "@/types/window";
 
-export default function Home() {
+function HomePage() {
+  const { dispatch } = useWindows();
+
+  const handleNavigationClick = (type: NavigationType) => {
+    dispatch({ type: 'OPEN_WINDOW', windowType: type });
+  };
+
   return (
     <PageContainer>
       <div className="relative">
@@ -39,7 +50,10 @@ export default function Home() {
             </p>
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-12">
-              <div className="text-center">
+              <button 
+                onClick={() => handleNavigationClick('about')}
+                className="text-center hover:scale-105 transition-transform cursor-pointer"
+              >
                 <Image
                   src="/images/icons/about.png"
                   alt="About"
@@ -48,9 +62,12 @@ export default function Home() {
                   className="mx-auto mb-2"
                 />
                 <span className="text-foreground font-medium">About</span>
-              </div>
+              </button>
               
-              <div className="text-center">
+              <button 
+                onClick={() => handleNavigationClick('faq')}
+                className="text-center hover:scale-105 transition-transform cursor-pointer"
+              >
                 <Image
                   src="/images/icons/faq.png"
                   alt="FAQ"
@@ -59,9 +76,12 @@ export default function Home() {
                   className="mx-auto mb-2"
                 />
                 <span className="text-foreground font-medium">FAQ</span>
-              </div>
+              </button>
               
-              <div className="text-center">
+              <button 
+                onClick={() => handleNavigationClick('fees')}
+                className="text-center hover:scale-105 transition-transform cursor-pointer"
+              >
                 <Image
                   src="/images/icons/fees.png"
                   alt="Fees"
@@ -70,9 +90,12 @@ export default function Home() {
                   className="mx-auto mb-2"
                 />
                 <span className="text-foreground font-medium">Fees</span>
-              </div>
+              </button>
               
-              <div className="text-center">
+              <button 
+                onClick={() => handleNavigationClick('contact')}
+                className="text-center hover:scale-105 transition-transform cursor-pointer"
+              >
                 <Image
                   src="/images/icons/contact.png"
                   alt="Contact"
@@ -81,7 +104,7 @@ export default function Home() {
                   className="mx-auto mb-2"
                 />
                 <span className="text-foreground font-medium">Contact</span>
-              </div>
+              </button>
             </div>
           </div>
         </ContentCard>
@@ -135,6 +158,16 @@ export default function Home() {
           />
         </div>
       </div>
+      
+      <WindowManager />
     </PageContainer>
+  );
+}
+
+export default function Home() {
+  return (
+    <WindowProvider>
+      <HomePage />
+    </WindowProvider>
   );
 }

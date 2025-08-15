@@ -1,4 +1,4 @@
-import { NavigationType } from './navigation';
+export type NavigationType = 'about' | 'faq' | 'fees' | 'contact';
 
 export interface Position {
   x: number;
