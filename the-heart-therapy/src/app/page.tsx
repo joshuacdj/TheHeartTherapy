@@ -37,15 +37,15 @@ function HomePage() {
               background: 'linear-gradient(to bottom, #D9D9D9, #B7B7B7)'
             }}
           >
-            <span className="text-foreground font-medium">home</span>
+            <span className="text-foreground font-medium font-josefin-sans text-lg">home</span>
           </div>
           
           <div className="text-center mt-4">
-            <h1 className="text-4xl font-bold text-foreground mb-4">
+            <h1 className="text-5xl font-bold text-foreground mb-4 font-patrick-hand">
               hi! <span className="text-primary">i&apos;m hanyu</span>
             </h1>
             
-            <p className="text-lg text-secondary mb-8">
+            <p className="text-lg text-secondary mb-8 font-ubuntu italic">
               professional counsellor of 3 years (Master of Counselling)
             </p>
             
@@ -61,7 +61,7 @@ function HomePage() {
                   height={64}
                   className="mx-auto mb-2"
                 />
-                <span className="text-foreground font-medium">About</span>
+                <span className="text-foreground font-medium font-patrick-hand text-lg">About</span>
               </button>
               
               <button 
@@ -75,7 +75,7 @@ function HomePage() {
                   height={64}
                   className="mx-auto mb-2"
                 />
-                <span className="text-foreground font-medium">FAQ</span>
+                <span className="text-foreground font-medium font-patrick-hand text-lg">FAQ</span>
               </button>
               
               <button 
@@ -89,7 +89,7 @@ function HomePage() {
                   height={64}
                   className="mx-auto mb-2"
                 />
-                <span className="text-foreground font-medium">Fees</span>
+                <span className="text-foreground font-medium font-patrick-hand text-lg">Fees</span>
               </button>
               
               <button 
@@ -103,7 +103,7 @@ function HomePage() {
                   height={64}
                   className="mx-auto mb-2"
                 />
-                <span className="text-foreground font-medium">Contact</span>
+                <span className="text-foreground font-medium font-patrick-hand text-lg">Contact</span>
               </button>
             </div>
           </div>
@@ -123,11 +123,11 @@ function HomePage() {
                 boxShadow: '0 10px 25px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05)'
               }}
             >
-              <p className="text-sm text-foreground leading-relaxed mb-2 pr-1">
+              <p className="text-base text-foreground leading-relaxed mb-2 pr-1 font-patrick-hand">
 &ldquo;Thank you for your patience & guidance all this while&rdquo;
               </p>
               <div className="text-right">
-                <span className="text-primary text-xs font-medium">~EZ</span>
+                <span className="text-primary text-sm font-medium font-patrick-hand">~EZ</span>
               </div>
             </div>
             

@@ -35,7 +35,7 @@ export default function WindowHeader({
       onMouseDown={onMouseDown}
     >
       <div className="flex items-center gap-3">
-        <span className="text-foreground font-medium">{formatTitle(title)}</span>
+        <span className="text-foreground font-medium font-josefin-sans text-lg">{formatTitle(title)}</span>
         {children}
       </div>
       
