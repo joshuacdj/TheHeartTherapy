@@ -7,17 +7,11 @@ export default function FeesSection() {
 
   return (
     <div className="max-w-2xl mx-auto text-center">
-      <h2 className="text-2xl font-bold text-foreground mb-6">
-        Session Fees
-      </h2>
       
-      <div className="mb-8 p-6 bg-primary/5 rounded-xl border border-primary/10">
-        <div className="text-3xl font-bold text-primary mb-2">
+      <div className="mb-8 p-6 bg-blue-50 rounded-xl border border-blue-200">
+        <div className="text-3xl font-bold text-blue-700 mb-2">
           {fees.price}
         </div>
-        <p className="text-secondary text-sm">
-          Professional therapy sessions
-        </p>
       </div>
 
       <div className="text-left space-y-6">

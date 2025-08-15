@@ -2,7 +2,7 @@ export const WINDOW_CONFIG = {
   MIN_Z_INDEX: 1000,
   INITIAL_POSITION: { x: 100, y: 100 },
   OFFSET_INCREMENT: 30,
-  DEFAULT_SIZE: { width: 500, height: 400 },
+  DEFAULT_SIZE: { width: 900, height: 650 },
   HEADER_HEIGHT: 40,
 } as const;
 

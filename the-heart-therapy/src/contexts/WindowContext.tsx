@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useReducer, ReactNode } from 'react';
 import { WindowState, NavigationType } from '@/types/window';
-import { generateWindowId, calculateCascadePosition } from '@/utils/helpers';
+import { generateWindowId, getIconBasedPosition } from '@/utils/helpers';
 import { WINDOW_CONFIG } from '@/utils/constants';
 
 interface WindowContextState {
@@ -39,11 +39,11 @@ const windowReducer = (state: WindowContextState, action: WindowAction): WindowC
       }
 
       const openWindowsCount = state.windows.filter(w => w.isOpen).length;
-      const position = calculateCascadePosition(
-        WINDOW_CONFIG.INITIAL_POSITION,
-        openWindowsCount,
-        WINDOW_CONFIG.OFFSET_INCREMENT
-      );
+      const basePosition = getIconBasedPosition(action.windowType);
+      const position = {
+        x: basePosition.x + (openWindowsCount * WINDOW_CONFIG.OFFSET_INCREMENT),
+        y: basePosition.y + (openWindowsCount * WINDOW_CONFIG.OFFSET_INCREMENT),
+      };
 
       const newWindow: WindowState = {
         id: generateWindowId(action.windowType),

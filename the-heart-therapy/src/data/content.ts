@@ -58,7 +58,7 @@ Therapy is our collaborative journey to explore new perspectives and build resil
       },
       {
         title: '3. Practical Tools for Real Life',
-        description: 'Youll walk away with actionable strategies that fit your life.',
+        description: "You'll walk away with actionable strategies that fit your life.",
       },
       {
         title: '4. Safe & Judgement-Free Space',
