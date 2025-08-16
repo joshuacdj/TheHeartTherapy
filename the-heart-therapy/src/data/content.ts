@@ -81,9 +81,7 @@ Hanyu brings a warm and nurturing presence into her work, creating a space where
         { name: 'dateTime', label: 'Preferred Date & Time Slots', type: 'textarea', required: false },
       ],
       serviceOptions: [
-        'Individual Therapy Session',
-        'Initial Consultation',
-        'Follow-up Session',
+        'Online Individual Counselling - SG$120/hr',
       ],
     },
   },
