@@ -39,18 +39,21 @@ const windowReducer = (state: WindowContextState, action: WindowAction): WindowC
       }
 
       const openWindowsCount = state.windows.filter(w => w.isOpen).length;
+      
       const basePosition = getIconBasedPosition(action.windowType);
       const position = {
-        x: basePosition.x + (openWindowsCount * WINDOW_CONFIG.OFFSET_INCREMENT),
-        y: basePosition.y + (openWindowsCount * WINDOW_CONFIG.OFFSET_INCREMENT),
+        x: Math.max(0, basePosition.x + (openWindowsCount * WINDOW_CONFIG.OFFSET_INCREMENT)),
+        y: Math.max(0, basePosition.y + (openWindowsCount * WINDOW_CONFIG.OFFSET_INCREMENT)),
       };
+
+      const windowSize = WINDOW_CONFIG.DEFAULT_SIZE;
 
       const newWindow: WindowState = {
         id: generateWindowId(action.windowType),
         type: action.windowType,
         isOpen: true,
         position,
-        size: WINDOW_CONFIG.DEFAULT_SIZE,
+        size: windowSize,
         zIndex: state.highestZIndex + 1,
         isMinimized: false,
         isFocused: true,

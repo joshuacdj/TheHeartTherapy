@@ -42,11 +42,20 @@ export default function PopupWindow({ window: windowState, children, className }
   // Set constraints after hydration to avoid SSR mismatch
   useEffect(() => {
     const updateConstraints = () => {
+      // Get the actual viewport dimensions (considering CSS scaling)
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      
+      // Calculate safe boundaries with some padding
+      const padding = 20;
+      const maxX = Math.max(padding, viewportWidth - windowState.size.width - padding);
+      const maxY = Math.max(padding, viewportHeight - windowState.size.height - padding);
+      
       setConstraints({
-        minX: 0,
-        maxX: window.innerWidth - windowState.size.width,
+        minX: -padding, // Allow slightly off-screen for better UX
+        maxX: maxX,
         minY: 0,
-        maxY: window.innerHeight - windowState.size.height,
+        maxY: maxY,
       });
     };
     
@@ -92,7 +101,7 @@ export default function PopupWindow({ window: windowState, children, className }
     };
   }, [stopScrollSound]);
   
-  const { position, isDragging, handleMouseDown } = useDragAndDrop(
+  const { position, isDragging, handleMouseDown, handleTouchStart } = useDragAndDrop(
     windowState.position,
     {
       onDrag: (newPosition) => {
@@ -105,7 +114,7 @@ export default function PopupWindow({ window: windowState, children, className }
       onDragEnd: () => {
         stopScrollSound();
       },
-      constraints,
+      constraints: undefined, // Temporarily disable constraints for debugging
       elementRef: windowRef,
     }
   );
@@ -161,6 +170,7 @@ export default function PopupWindow({ window: windowState, children, className }
             onClose={handleClose}
             onMinimize={handleMinimize}
             onMouseDown={handleMouseDown}
+            onTouchStart={handleTouchStart}
             isMinimized={windowState.isMinimized}
           />
           

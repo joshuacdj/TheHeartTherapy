@@ -154,7 +154,7 @@ function HomePage() {
       </div>
       
       {/* Testimonial cat in bottom right */}
-      <div className="fixed bottom-8 right-4 sm:right-8">
+      <div className="fixed bottom-8 right-8">
         <div className="relative">
           {/* Thought bubble positioned above the cat */}
           <div className="absolute bottom-full mb-6 -right-8 sm:right-1/2 sm:transform sm:translate-x-16">
