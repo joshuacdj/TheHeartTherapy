@@ -42,7 +42,7 @@ Hanyu brings a warm and nurturing presence into her work, creating a space where
   ],
   fees: {
     price: 'SGD120 Per Session (60mins)',
-    question: 'WHY DO THERAPY SESSIONS COST SGD 110?',
+    question: 'WHY DO THERAPY SESSIONS COST SGD 120?',
     answer: 'Therapy is an investment in your wellbeing - Your fee covers not just our time together, but also my preparation and effort for each session.',
     benefits: [
       {
