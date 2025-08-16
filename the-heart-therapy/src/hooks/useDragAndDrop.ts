@@ -23,7 +23,7 @@ export function useDragAndDrop(initialPosition: Position, options: UseDragOption
   // Sync position with external changes
   useEffect(() => {
     setPosition(initialPosition);
-  }, [initialPosition.x, initialPosition.y]);
+  }, [initialPosition]);
   const dragRef = useRef<{ 
     startX: number; 
     startY: number; 
@@ -103,15 +103,15 @@ export function useDragAndDrop(initialPosition: Position, options: UseDragOption
       dragRef.current = null;
       options.onDragEnd?.();
       
-      document.removeEventListener('mousemove', moveHandler as any);
+      document.removeEventListener('mousemove', moveHandler);
       document.removeEventListener('mouseup', endHandler);
-      document.removeEventListener('touchmove', moveHandler as any);
+      document.removeEventListener('touchmove', moveHandler);
       document.removeEventListener('touchend', endHandler);
     };
     
-    document.addEventListener('mousemove', moveHandler as any);
+    document.addEventListener('mousemove', moveHandler);
     document.addEventListener('mouseup', endHandler);
-    document.addEventListener('touchmove', moveHandler as any, { passive: false });
+    document.addEventListener('touchmove', moveHandler, { passive: false });
     document.addEventListener('touchend', endHandler);
     
     options.onDragStart?.();
@@ -125,7 +125,7 @@ export function useDragAndDrop(initialPosition: Position, options: UseDragOption
     if (element) {
       startDrag(e.clientX, e.clientY, element as HTMLElement);
     }
-  }, [startDrag]);
+  }, [startDrag, options.elementRef]);
 
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     e.preventDefault();
@@ -135,7 +135,7 @@ export function useDragAndDrop(initialPosition: Position, options: UseDragOption
     if (element && e.touches.length === 1) {
       startDrag(e.touches[0].clientX, e.touches[0].clientY, element as HTMLElement);
     }
-  }, [startDrag]);
+  }, [startDrag, options.elementRef]);
 
   return {
     position,
