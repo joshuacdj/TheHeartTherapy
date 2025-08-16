@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback, useRef, useEffect } from 'react';
-import { Position } from '@/types/position';
+import { Position } from '@/types/window';
 
 interface UseDragOptions {
   onDrag?: (position: Position) => void;
@@ -27,7 +27,6 @@ export function useDragAndDrop(initialPosition: Position, options: UseDragOption
   } | null>(null);
   const constraintsRef = useRef(options.constraints);
 
-  // Update constraints ref when they change
   useEffect(() => {
     constraintsRef.current = options.constraints;
   }, [options.constraints]);
@@ -42,8 +41,6 @@ export function useDragAndDrop(initialPosition: Position, options: UseDragOption
       y: Math.max(minY, Math.min(maxY, pos.y)),
     };
   }, []);
-
-
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
@@ -60,7 +57,6 @@ export function useDragAndDrop(initialPosition: Position, options: UseDragOption
       element: element as HTMLElement,
     };
     
-    // Create fresh handlers to avoid stale closure issues
     let currentPosition = { ...position };
     
             const mouseMoveHandler = (moveEvent: MouseEvent) => {
@@ -76,8 +72,6 @@ export function useDragAndDrop(initialPosition: Position, options: UseDragOption
             y: dragRef.current.startPos.y + deltaY,
           });
 
-          // Direct DOM manipulation for immediate visual feedback
-          // Apply transform as offset from original position, not absolute position
           if (dragRef.current.element) {
             dragRef.current.element.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
           }
@@ -86,12 +80,10 @@ export function useDragAndDrop(initialPosition: Position, options: UseDragOption
     const mouseUpHandler = () => {
       if (!dragRef.current) return;
       
-      // Reset transform and rely on position state
       if (dragRef.current.element) {
         dragRef.current.element.style.transform = '';
       }
       
-      // Update final position
       setPosition(currentPosition);
       options.onDrag?.(currentPosition);
       
@@ -99,24 +91,15 @@ export function useDragAndDrop(initialPosition: Position, options: UseDragOption
       dragRef.current = null;
       options.onDragEnd?.();
       
-      // Clean up event listeners
       document.removeEventListener('mousemove', mouseMoveHandler);
       document.removeEventListener('mouseup', mouseUpHandler);
     };
     
-    // Add event listeners immediately for responsiveness
     document.addEventListener('mousemove', mouseMoveHandler);
     document.addEventListener('mouseup', mouseUpHandler);
     
     options.onDragStart?.();
   }, [position, options, constrainPosition]);
-
-  // Cleanup on unmount
-  useEffect(() => {
-    return () => {
-      // Event listeners are cleaned up inline in mouseUpHandler
-    };
-  }, []);
 
   return {
     position,

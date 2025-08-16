@@ -32,7 +32,7 @@ export function SoundEffectsProvider({ children }: SoundEffectsProviderProps) {
     try {
       const audio = new Audio(soundPath);
       audio.preload = 'auto';
-      audio.volume = 0.3; // Set volume to 30% to be non-intrusive
+      audio.volume = 0.3;
       return audio;
     } catch (error) {
       console.warn(`Failed to load sound: ${soundPath}`, error);
@@ -41,10 +41,7 @@ export function SoundEffectsProvider({ children }: SoundEffectsProviderProps) {
   }, []);
 
   const playSound = useCallback((soundKey: string, soundPath: string) => {
-    // Don't play if muted
-    if (isMuted) {
-      return;
-    }
+    if (isMuted) return;
     
     if (!audioRefs.current[soundKey]) {
       audioRefs.current[soundKey] = createAudio(soundPath);
@@ -53,10 +50,8 @@ export function SoundEffectsProvider({ children }: SoundEffectsProviderProps) {
     const audio = audioRefs.current[soundKey];
     if (audio) {
       try {
-        // Reset to beginning and play
         audio.currentTime = 0;
         audio.play().catch(error => {
-          // Ignore autoplay policy errors
           console.debug(`Audio play prevented: ${soundKey}`, error);
         });
       } catch (error) {

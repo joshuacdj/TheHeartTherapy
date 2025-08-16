@@ -1,7 +1,7 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { NavigationType } from '@/types/window';
-import { Position } from '@/types/position';
+import { Position } from '@/types/window';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -23,10 +23,6 @@ export function calculateCascadePosition(
 }
 
 export function getIconBasedPosition(type: NavigationType): Position {
-  // Calculate position based on icon grid layout
-  // Grid is 2x2 on mobile, 1x4 on desktop
-  // About: position 0, FAQ: position 1, Fees: position 2, Contact: position 3
-  
   const iconPositions = {
     about: { gridIndex: 0 },
     faq: { gridIndex: 1 },
@@ -39,21 +35,18 @@ export function getIconBasedPosition(type: NavigationType): Position {
   const isMobile = screenWidth < 768;
   
   if (isMobile) {
-    // 2x2 grid layout on mobile
     const row = Math.floor(gridIndex / 2);
     const col = gridIndex % 2;
     return {
-      x: 50 + (col * 200), // Closer horizontal positioning for mobile
-      y: 150 + (row * 50), // Keep within screen, slight vertical offset per row
+      x: 50 + (col * 200),
+      y: 150 + (row * 50),
     };
   } else {
-    // 1x4 grid layout on desktop
     const col = gridIndex;
-    // Adjust Contact window to stay within screen bounds
-    const baseX = col === 3 ? 400 : 150 + (col * 180); // Contact (index 3) gets special positioning
+    const baseX = col === 3 ? 400 : 150 + (col * 180);
     return {
       x: baseX,
-      y: 120, // Keep in upper portion of screen
+      y: 120,
     };
   }
 }

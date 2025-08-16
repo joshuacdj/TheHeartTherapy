@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import Image from "next/image";
 import PageContainer from "@/components/layout/PageContainer";
 import ContentCard from "@/components/layout/ContentCard";
@@ -20,27 +20,27 @@ function HomePage() {
   const [isVisible, setIsVisible] = useState(true);
   const [shouldStartTypewriter, setShouldStartTypewriter] = useState(true);
 
-  const currentTestimonial = testimonials[currentTestimonialIndex];
+  const currentTestimonial = useMemo(() => 
+    testimonials[currentTestimonialIndex], 
+    [currentTestimonialIndex]
+  );
   
-  // Typewriter effect for the current testimonial
   const { displayedText, isComplete } = useTypewriter({
     text: shouldStartTypewriter ? currentTestimonial.text : '',
-    speed: 25, // Fast typewriter speed (25ms per character)
-    startDelay: 300, // Small delay after fade-in
+    speed: 25,
+    startDelay: 300,
   });
-
-  // Auto-rotate testimonials
   useEffect(() => {
     const interval = setInterval(() => {
-      setIsVisible(false); // Fade out current testimonial
-      setShouldStartTypewriter(false); // Stop typewriter
+      setIsVisible(false);
+      setShouldStartTypewriter(false);
       
       setTimeout(() => {
         setCurrentTestimonialIndex((prevIndex) => 
           (prevIndex + 1) % testimonials.length
         );
-        setIsVisible(true); // Fade in new testimonial
-        setShouldStartTypewriter(true); // Start typewriter for new text
+        setIsVisible(true);
+        setShouldStartTypewriter(true);
       }, TESTIMONIAL_CONFIG.TRANSITION_DURATION);
       
     }, TESTIMONIAL_CONFIG.ROTATION_INTERVAL);
@@ -48,13 +48,10 @@ function HomePage() {
     return () => clearInterval(interval);
   }, []);
 
-  const handleNavigationClick = (type: NavigationType) => {
-    // Play click sound
+  const handleNavigationClick = useCallback((type: NavigationType) => {
     playClick();
-    
-    // Open the window
     dispatch({ type: 'OPEN_WINDOW', windowType: type });
-  };
+  }, [playClick, dispatch]);
 
   return (
     <PageContainer>

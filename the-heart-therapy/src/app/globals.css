@@ -80,26 +80,6 @@
   cursor: grabbing;
 }
 
-/* Dark mode disabled for now - we want to force light mode */
-/* 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #1a202c;
-    --foreground: #e2e8f0;
-    --card-background: #2d3748;
-    --surface: #2d3748;
-    --muted: #4a5568;
-    --border: #4a5568;
-    --primary: #ed4857;
-    --primary-foreground: #ffffff;
-    --secondary: #718096;
-    --secondary-foreground: #ffffff;
-    --accent: #ffd6cc;
-    --accent-foreground: #1a202c;
-  }
-}
-*/
-
 /* Base styles */
 * {
   box-sizing: border-box;
