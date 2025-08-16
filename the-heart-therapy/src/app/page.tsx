@@ -223,3 +223,6 @@ export default function Home() {
     </WindowProvider>
   );
 }
+
+// Force static optimization
+export const dynamic = 'force-static';
