@@ -125,7 +125,7 @@ body {
   .fixed.bottom-16.right-8 {
     transform: scale(0.8);
     transform-origin: bottom right;
-    bottom: 120px !important; /* Move up much more on tablets */
+    bottom: 180px !important; /* Move up significantly on tablets */
   }
   
   /* Ensure popups don't overflow on tablets */
@@ -147,7 +147,7 @@ body {
   .fixed.bottom-16.right-8 {
     transform: scale(0.6);
     transform-origin: bottom right;
-    bottom: 150px !important; /* Move up significantly more on phones */
+    bottom: 220px !important; /* Move up very high on phones */
   }
   
   /* Make popups mobile-friendly */
