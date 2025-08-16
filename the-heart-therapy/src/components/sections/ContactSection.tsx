@@ -37,18 +37,18 @@ Preferred Date & Time: ${formData.dateTime}`;
 
   return (
     <div className="max-w-lg mx-auto">
-      <h2 className="text-2xl font-bold text-foreground mb-6 text-center">
+      <h2 className="text-3xl font-bold text-foreground mb-6 text-center font-patrick-hand">
         Get In Touch
       </h2>
       
       <div className="mb-6 text-center">
         <div className="flex items-center justify-center gap-2 mb-2">
           <Mail size={20} className="text-primary" />
-          <span className="text-sm text-secondary">{contact.message}</span>
+          <span className="text-secondary font-ubuntu-mono">{contact.message}</span>
         </div>
         <a 
           href={`mailto:${contact.email}`}
-          className="text-primary font-medium hover:underline"
+          className="text-primary font-medium hover:underline font-ubuntu-mono"
         >
           {contact.email}
         </a>
@@ -57,7 +57,7 @@ Preferred Date & Time: ${formData.dateTime}`;
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-foreground mb-1">
+            <label className="block font-bold italic text-foreground mb-1 font-ubuntu-mono">
               First Name *
             </label>
             <input
@@ -70,7 +70,7 @@ Preferred Date & Time: ${formData.dateTime}`;
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-foreground mb-1">
+            <label className="block font-bold italic text-foreground mb-1 font-ubuntu-mono">
               Last Name *
             </label>
             <input
@@ -85,7 +85,7 @@ Preferred Date & Time: ${formData.dateTime}`;
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-foreground mb-1">
+          <label className="block font-bold italic text-foreground mb-1 font-ubuntu-mono">
             Email *
           </label>
           <input
@@ -99,7 +99,7 @@ Preferred Date & Time: ${formData.dateTime}`;
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-foreground mb-1">
+          <label className="block font-bold italic text-foreground mb-1 font-ubuntu-mono">
             Phone *
           </label>
           <input
@@ -113,7 +113,7 @@ Preferred Date & Time: ${formData.dateTime}`;
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-foreground mb-1">
+          <label className="block font-bold italic text-foreground mb-1 font-ubuntu-mono">
             Select Service *
           </label>
           <select
@@ -133,7 +133,7 @@ Preferred Date & Time: ${formData.dateTime}`;
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-foreground mb-1">
+          <label className="block font-bold italic text-foreground mb-1 font-ubuntu-mono">
             Preferred Date & Time Slots
           </label>
           <textarea
@@ -149,7 +149,7 @@ Preferred Date & Time: ${formData.dateTime}`;
         <button
           type="submit"
           className={cn(
-            'w-full bg-primary text-white py-3 px-4 rounded-md font-medium',
+            'w-full bg-primary text-white py-3 px-4 rounded-md font-medium font-ubuntu-mono',
             'hover:bg-primary/90 transition-colors focus:outline-none focus:ring-2 focus:ring-primary/20'
           )}
         >

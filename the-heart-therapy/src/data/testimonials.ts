@@ -1,29 +1,31 @@
-import { Testimonial } from '@/types/testimonial';
+export interface Testimonial {
+  text: string;
+  author: string;
+}
 
 export const testimonials: Testimonial[] = [
   {
-    id: '1',
-    content: 'Thank you for your patience & guidance all this while',
-    author: 'Client',
+    text: "Thank you for your patience & guidance all this while",
+    author: "EZ"
   },
   {
-    id: '2',
-    content: 'The sessions have been incredibly helpful for my mental health journey',
-    author: 'Client',
+    text: "it's been hard but i'm doing a lot better! I just wanna thank you for listening when i needed someone and your advices did help me and i'm grateful for that. thank you for being that little light during the darkest period of my life",
+    author: "MR"
   },
   {
-    id: '3',
-    content: 'I feel much more confident and equipped to handle daily challenges',
-    author: 'Client',
+    text: "Thank you for listening to my emotions",
+    author: "L"
   },
   {
-    id: '4',
-    content: 'Your approach is so warm and understanding. Thank you!',
-    author: 'Client',
+    text: "The sessions were really insightful and helped me learn more about myself, and I even discovered news things about myself. I'm super grateful for all the help I received!",
+    author: "RN"
   },
   {
-    id: '5',
-    content: 'The safe space you create has made all the difference',
-    author: 'Client',
+    text: "I really appreciated the balance of humor and seriousness in our sessions. it made therapy feel less intimidating and helped me feel comfortable being myself. Because of that, I found it easier to open up and share more. Thank you for creating such a supportive space!",
+    author: "XW"
   },
+  {
+    text: "I really liked how you gave me practical coping strategies I can actually use every day. Thank you",
+    author: "NTS"
+  }
 ];

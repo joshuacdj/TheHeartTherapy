@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Patrick_Hand, Josefin_Sans, Ubuntu } from "next/font/google";
+import { Inter, Patrick_Hand, Josefin_Sans, Ubuntu, Ubuntu_Mono } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -25,6 +25,14 @@ const ubuntu = Ubuntu({
   variable: "--font-ubuntu",
   subsets: ["latin"],
   weight: ["300", "400"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const ubuntuMono = Ubuntu_Mono({
+  variable: "--font-ubuntu-mono",
+  subsets: ["latin"],
+  weight: ["400", "700"],
   style: ["normal", "italic"],
   display: "swap",
 });
@@ -59,7 +67,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#ed4857" />
       </head>
-      <body className={`${inter.variable} ${patrickHand.variable} ${josefinSans.variable} ${ubuntu.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${patrickHand.variable} ${josefinSans.variable} ${ubuntu.variable} ${ubuntuMono.variable} font-sans antialiased`}>
         {children}
       </body>
     </html>

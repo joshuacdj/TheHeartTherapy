@@ -12,6 +12,7 @@ interface WindowHeaderProps {
   onMouseDown?: (e: React.MouseEvent) => void;
   children?: ReactNode;
   className?: string;
+  isMinimized?: boolean;
 }
 
 export default function WindowHeader({ 
@@ -20,12 +21,13 @@ export default function WindowHeader({
   onMinimize, 
   onMouseDown,
   children,
-  className 
+  className,
+  isMinimized = false
 }: WindowHeaderProps) {
   return (
     <div
       className={cn(
-        'flex items-center justify-between px-4 py-3 cursor-move select-none',
+        'flex items-center justify-between px-4 py-3 cursor-grab select-none',
         'rounded-t-3xl border-b border-foreground',
         className
       )}
@@ -43,6 +45,7 @@ export default function WindowHeader({
         onClose={onClose}
         onMinimize={onMinimize}
         showMinimize={!!onMinimize}
+        isMinimized={isMinimized}
       />
     </div>
   );

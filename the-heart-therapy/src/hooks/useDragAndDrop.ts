@@ -46,12 +46,10 @@ export function useDragAndDrop(initialPosition: Position, options: UseDragOption
 
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
-    console.log('handleMouseDown called', e.type);
     e.preventDefault();
     e.stopPropagation();
     
     const element = options.elementRef?.current || (e.target as HTMLElement).closest('[data-draggable]');
-    console.log('Found element:', element);
     
     setIsDragging(true);
     
@@ -65,32 +63,27 @@ export function useDragAndDrop(initialPosition: Position, options: UseDragOption
     // Create fresh handlers to avoid stale closure issues
     let currentPosition = { ...position };
     
-    const mouseMoveHandler = (moveEvent: MouseEvent) => {
-      if (!dragRef.current) {
-        console.log('handleMouseMove: no dragRef.current');
-        return;
-      }
+            const mouseMoveHandler = (moveEvent: MouseEvent) => {
+          if (!dragRef.current) {
+            return;
+          }
 
-      const deltaX = moveEvent.clientX - dragRef.current.startX;
-      const deltaY = moveEvent.clientY - dragRef.current.startY;
-      
-      currentPosition = constrainPosition({
-        x: dragRef.current.startPos.x + deltaX,
-        y: dragRef.current.startPos.y + deltaY,
-      });
+          const deltaX = moveEvent.clientX - dragRef.current.startX;
+          const deltaY = moveEvent.clientY - dragRef.current.startY;
+          
+          currentPosition = constrainPosition({
+            x: dragRef.current.startPos.x + deltaX,
+            y: dragRef.current.startPos.y + deltaY,
+          });
 
-      console.log('Mouse move:', { deltaX, deltaY, currentPosition });
-
-      // Direct DOM manipulation for immediate visual feedback
-      // Apply transform as offset from original position, not absolute position
-      if (dragRef.current.element) {
-        dragRef.current.element.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
-        console.log('Applied transform:', `translate(${deltaX}px, ${deltaY}px)`);
-      }
-    };
+          // Direct DOM manipulation for immediate visual feedback
+          // Apply transform as offset from original position, not absolute position
+          if (dragRef.current.element) {
+            dragRef.current.element.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+          }
+        };
 
     const mouseUpHandler = () => {
-      console.log('Mouse up - ending drag');
       if (!dragRef.current) return;
       
       // Reset transform and rely on position state
@@ -115,7 +108,6 @@ export function useDragAndDrop(initialPosition: Position, options: UseDragOption
     document.addEventListener('mousemove', mouseMoveHandler);
     document.addEventListener('mouseup', mouseUpHandler);
     
-    console.log('Drag initialized, event listeners added');
     options.onDragStart?.();
   }, [position, options, constrainPosition]);
 

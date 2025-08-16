@@ -6,12 +6,9 @@ export const content = {
   about: {
     greeting: 'Hello there! :)',
     name: "I'm Hanyu...",
-    description: `I create a safe space where you can share freely.
-Life gets overwhelming—but you don't have to face it alone.
+    description: `Hanyu was born and raised in Singapore and holds a Master of Counselling as well as a Postgraduate Diploma in Counselling Psychology. She has experience in providing counselling in local secondary schools, tertiary institutions, international schools, and private practice settings, gaining valuable insight into the social, emotional, and needs of individuals from adolescence through young adulthood. Her experience has shaped a grounded, client-centred approach that balances emotional support with practical strategies for personal growth.
 
-Whether it's stress, anxiety, relationship challenges, or personal concerns, I'm here to support you with warmth and tailored practical strategies.
-
-Therapy is our collaborative journey to explore new perspectives and build resilience together. Our sessions feel like judgment-free conversations where you process emotions at your own pace, all from the comfort of your chosen space online.`,
+Hanyu brings a warm and nurturing presence into her work, creating a space where clients feel genuinely seen, heard, and safe. With patience and an open heart, she supports each client at their own pace, listening deeply and without judgment. She believes in meeting clients where they are, and gently guiding them to recognise their own strengths, reflect on their experiences, and develop into a fuller sense of who they are. For Hanyu, counselling is a process of walking alongside someone, helping them feel less alone, and reminding them that they have the strength and capacity to move forward.`,
     approach: {
       title: 'My Approach:',
       description: 'Collaborative, client-centered therapy with a warm and conversational style to explore your personal strengths whilst developing practical strategies.',
@@ -44,7 +41,7 @@ Therapy is our collaborative journey to explore new perspectives and build resil
     },
   ],
   fees: {
-    price: 'SGD110 Per Session (60mins)',
+    price: 'SGD120 Per Session (60mins)',
     question: 'WHY DO THERAPY SESSIONS COST SGD 110?',
     answer: 'Therapy is an investment in your wellbeing - Your fee covers not just our time together, but also my preparation and effort for each session.',
     benefits: [

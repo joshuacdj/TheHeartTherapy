@@ -7,7 +7,7 @@ export const WINDOW_CONFIG = {
 } as const;
 
 export const TESTIMONIAL_CONFIG = {
-  ROTATION_INTERVAL: 5000,
+  ROTATION_INTERVAL: 30000, // 30 seconds
   TRANSITION_DURATION: 500,
 } as const;
 

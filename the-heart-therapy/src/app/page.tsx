@@ -1,16 +1,57 @@
 'use client';
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import PageContainer from "@/components/layout/PageContainer";
 import ContentCard from "@/components/layout/ContentCard";
 import WindowManager from "@/components/windows/WindowManager";
 import { useWindows, WindowProvider } from "@/contexts/WindowContext";
 import { NavigationType } from "@/types/window";
+import { testimonials, Testimonial } from "@/data/testimonials";
+import { TESTIMONIAL_CONFIG } from "@/utils/constants";
+import { useTypewriter } from "@/hooks/useTypewriter";
+import { useSoundEffects } from "@/hooks/useSoundEffects";
 
 function HomePage() {
   const { dispatch } = useWindows();
+  const { playHover, playClick } = useSoundEffects();
+  const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(true);
+  const [shouldStartTypewriter, setShouldStartTypewriter] = useState(true);
+
+  const currentTestimonial = testimonials[currentTestimonialIndex];
+  
+  // Typewriter effect for the current testimonial
+  const { displayedText, isComplete } = useTypewriter({
+    text: shouldStartTypewriter ? currentTestimonial.text : '',
+    speed: 25, // Fast typewriter speed (25ms per character)
+    startDelay: 300, // Small delay after fade-in
+  });
+
+  // Auto-rotate testimonials
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIsVisible(false); // Fade out current testimonial
+      setShouldStartTypewriter(false); // Stop typewriter
+      
+      setTimeout(() => {
+        setCurrentTestimonialIndex((prevIndex) => 
+          (prevIndex + 1) % testimonials.length
+        );
+        setIsVisible(true); // Fade in new testimonial
+        setShouldStartTypewriter(true); // Start typewriter for new text
+      }, TESTIMONIAL_CONFIG.TRANSITION_DURATION);
+      
+    }, TESTIMONIAL_CONFIG.ROTATION_INTERVAL);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const handleNavigationClick = (type: NavigationType) => {
+    // Play click sound
+    playClick();
+    
+    // Open the window
     dispatch({ type: 'OPEN_WINDOW', windowType: type });
   };
 
@@ -46,12 +87,13 @@ function HomePage() {
             </h1>
             
             <p className="text-lg text-secondary mb-8 font-ubuntu italic">
-              professional counsellor of 3 years (Master of Counselling)
+              professional counsellor (Master of Counselling)
             </p>
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-12">
               <button 
                 onClick={() => handleNavigationClick('about')}
+                onMouseEnter={playHover}
                 className="text-center hover:scale-105 transition-transform cursor-pointer"
               >
                 <Image
@@ -66,6 +108,7 @@ function HomePage() {
               
               <button 
                 onClick={() => handleNavigationClick('faq')}
+                onMouseEnter={playHover}
                 className="text-center hover:scale-105 transition-transform cursor-pointer"
               >
                 <Image
@@ -80,6 +123,7 @@ function HomePage() {
               
               <button 
                 onClick={() => handleNavigationClick('fees')}
+                onMouseEnter={playHover}
                 className="text-center hover:scale-105 transition-transform cursor-pointer"
               >
                 <Image
@@ -94,6 +138,7 @@ function HomePage() {
               
               <button 
                 onClick={() => handleNavigationClick('contact')}
+                onMouseEnter={playHover}
                 className="text-center hover:scale-105 transition-transform cursor-pointer"
               >
                 <Image
@@ -117,22 +162,30 @@ function HomePage() {
           <div className="absolute bottom-full mb-6 -right-8 sm:right-1/2 sm:transform sm:translate-x-16">
             {/* Cloud-like thought bubble */}
             <div 
-              className="relative bg-white p-3 border border-gray-200 w-48 max-w-sm"
+              className="relative bg-white p-3 border border-gray-200 w-48 max-w-sm transition-opacity duration-500"
               style={{
                 borderRadius: '25px 30px 25px 15px',
-                boxShadow: '0 10px 25px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05)'
+                boxShadow: '0 10px 25px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05)',
+                opacity: isVisible ? 1 : 0
               }}
             >
               <p className="text-base text-foreground leading-relaxed mb-2 pr-1 font-patrick-hand">
-&ldquo;Thank you for your patience & guidance all this while&rdquo;
+                &ldquo;{displayedText}
+                {!isComplete && (
+                  <span className="animate-pulse text-primary">|</span>
+                )}
+                &rdquo;
               </p>
               <div className="text-right">
-                <span className="text-primary text-sm font-medium font-patrick-hand">~EZ</span>
+                <span className="text-primary text-sm font-medium font-patrick-hand">~{currentTestimonial.author}</span>
               </div>
             </div>
             
             {/* Small connecting circles for thought bubble effect */}
-            <div className="absolute top-full left-1/2 transform -translate-x-2">
+            <div 
+              className="absolute top-full left-1/2 transform -translate-x-2 transition-opacity duration-500"
+              style={{ opacity: isVisible ? 1 : 0 }}
+            >
               <div 
                 className="w-3 h-3 bg-white rounded-full border border-gray-200 mb-1"
                 style={{ boxShadow: '0 4px 8px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08)' }}

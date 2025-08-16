@@ -43,6 +43,7 @@
   --font-patrick-hand: var(--font-patrick-hand);
   --font-josefin-sans: var(--font-josefin-sans);
   --font-ubuntu: var(--font-ubuntu);
+  --font-ubuntu-mono: var(--font-ubuntu-mono);
   
   /* Spacing and Layout */
   --radius: 0.75rem;
@@ -64,6 +65,19 @@
 
 .font-ubuntu {
   font-family: var(--font-ubuntu);
+}
+
+.font-ubuntu-mono {
+  font-family: var(--font-ubuntu-mono);
+}
+
+/* Enhanced cursor styles for better grab feedback */
+.cursor-grab {
+  cursor: grab;
+}
+
+.cursor-grabbing {
+  cursor: grabbing;
 }
 
 /* Dark mode disabled for now - we want to force light mode */
