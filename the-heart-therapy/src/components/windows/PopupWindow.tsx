@@ -7,7 +7,7 @@ import { useDragAndDrop } from '@/hooks/useDragAndDrop';
 import { useWindows } from '@/contexts/WindowContext';
 import { WindowState } from '@/types/window';
 import { cn } from '@/utils/helpers';
-import { useSoundEffects } from '@/hooks/useSoundEffects';
+import { useSoundEffects } from '@/contexts/SoundEffectsContext';
 
 interface PopupWindowProps {
   window: WindowState;

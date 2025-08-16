@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Patrick_Hand, Josefin_Sans, Ubuntu, Ubuntu_Mono } from "next/font/google";
 import "./globals.css";
+import { SoundEffectsProvider } from "@/contexts/SoundEffectsContext";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -68,7 +69,9 @@ export default function RootLayout({
         <meta name="theme-color" content="#ed4857" />
       </head>
       <body className={`${inter.variable} ${patrickHand.variable} ${josefinSans.variable} ${ubuntu.variable} ${ubuntuMono.variable} font-sans antialiased`}>
-        {children}
+        <SoundEffectsProvider>
+          {children}
+        </SoundEffectsProvider>
       </body>
     </html>
   );

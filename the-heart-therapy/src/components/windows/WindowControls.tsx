@@ -2,7 +2,7 @@
 
 import { X, Minus } from 'lucide-react';
 import { cn } from '@/utils/helpers';
-import { useSoundEffects } from '@/hooks/useSoundEffects';
+import { useSoundEffects } from '@/contexts/SoundEffectsContext';
 
 interface WindowControlsProps {
   onClose: React.MouseEventHandler<HTMLButtonElement>;

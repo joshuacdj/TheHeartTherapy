@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { content } from '@/data/content';
 import { cn } from '@/utils/helpers';
-import { useSoundEffects } from '@/hooks/useSoundEffects';
+import { useSoundEffects } from '@/contexts/SoundEffectsContext';
 
 export default function FAQSection() {
   const [openQuestions, setOpenQuestions] = useState<Set<number>>(new Set());

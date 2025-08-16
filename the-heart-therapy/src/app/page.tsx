@@ -5,12 +5,13 @@ import Image from "next/image";
 import PageContainer from "@/components/layout/PageContainer";
 import ContentCard from "@/components/layout/ContentCard";
 import WindowManager from "@/components/windows/WindowManager";
+import MuteButton from "@/components/ui/MuteButton";
 import { useWindows, WindowProvider } from "@/contexts/WindowContext";
 import { NavigationType } from "@/types/window";
 import { testimonials, Testimonial } from "@/data/testimonials";
 import { TESTIMONIAL_CONFIG } from "@/utils/constants";
 import { useTypewriter } from "@/hooks/useTypewriter";
-import { useSoundEffects } from "@/hooks/useSoundEffects";
+import { useSoundEffects } from "@/contexts/SoundEffectsContext";
 
 function HomePage() {
   const { dispatch } = useWindows();
@@ -213,6 +214,7 @@ function HomePage() {
       </div>
       
       <WindowManager />
+      <MuteButton />
     </PageContainer>
   );
 }

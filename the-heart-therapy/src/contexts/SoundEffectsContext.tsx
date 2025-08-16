@@ -1,8 +1,8 @@
 'use client';
 
-import { useCallback, useRef } from 'react';
+import React, { createContext, useContext, useState, useCallback, useRef } from 'react';
 
-interface SoundEffectsHook {
+interface SoundEffectsContextValue {
   playMinimize: () => void;
   playMaximize: () => void;
   playClose: () => void;
@@ -11,10 +11,20 @@ interface SoundEffectsHook {
   playScroll: () => void;
   playAccordionOpen: () => void;
   playAccordionClose: () => void;
+
+  isMuted: boolean;
+  toggleMute: () => void;
 }
 
-export function useSoundEffects(): SoundEffectsHook {
+const SoundEffectsContext = createContext<SoundEffectsContextValue | undefined>(undefined);
+
+interface SoundEffectsProviderProps {
+  children: React.ReactNode;
+}
+
+export function SoundEffectsProvider({ children }: SoundEffectsProviderProps) {
   const audioRefs = useRef<{ [key: string]: HTMLAudioElement | null }>({});
+  const [isMuted, setIsMuted] = useState(false);
 
   const createAudio = useCallback((soundPath: string): HTMLAudioElement | null => {
     if (typeof window === 'undefined') return null;
@@ -31,6 +41,11 @@ export function useSoundEffects(): SoundEffectsHook {
   }, []);
 
   const playSound = useCallback((soundKey: string, soundPath: string) => {
+    // Don't play if muted
+    if (isMuted) {
+      return;
+    }
+    
     if (!audioRefs.current[soundKey]) {
       audioRefs.current[soundKey] = createAudio(soundPath);
     }
@@ -48,7 +63,7 @@ export function useSoundEffects(): SoundEffectsHook {
         console.warn(`Failed to play sound: ${soundKey}`, error);
       }
     }
-  }, [createAudio]);
+  }, [createAudio, isMuted]);
 
   const playMinimize = useCallback(() => {
     playSound('minimize', '/sounds/Minimize.mp3');
@@ -82,7 +97,11 @@ export function useSoundEffects(): SoundEffectsHook {
     playSound('accordionClose', '/sounds/AccordionClose.mp3');
   }, [playSound]);
 
-  return {
+  const toggleMute = useCallback(() => {
+    setIsMuted(prev => !prev);
+  }, []);
+
+  const value: SoundEffectsContextValue = {
     playMinimize,
     playMaximize,
     playClose,
@@ -91,5 +110,21 @@ export function useSoundEffects(): SoundEffectsHook {
     playScroll,
     playAccordionOpen,
     playAccordionClose,
+    isMuted,
+    toggleMute,
   };
+
+  return (
+    <SoundEffectsContext.Provider value={value}>
+      {children}
+    </SoundEffectsContext.Provider>
+  );
+}
+
+export function useSoundEffects(): SoundEffectsContextValue {
+  const context = useContext(SoundEffectsContext);
+  if (context === undefined) {
+    throw new Error('useSoundEffects must be used within a SoundEffectsProvider');
+  }
+  return context;
 }
