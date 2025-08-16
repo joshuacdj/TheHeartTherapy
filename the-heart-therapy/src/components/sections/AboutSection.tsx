@@ -98,7 +98,7 @@ export default function AboutSection() {
               Clinical Experience
             </h5>
             <p className="text-secondary font-ubuntu-mono text-sm mb-3">
-              Supported over <span className="font-bold text-blue-700">100 clients</span> in the past 3 years, including:
+              Supported over <span className="font-bold text-blue-700">100 clients</span>, including:
             </p>
             <ul className="space-y-1 text-secondary font-ubuntu-mono text-sm">
               <li>• Youths & young adults in university and secondary schools (13-25)</li>
@@ -106,7 +106,7 @@ export default function AboutSection() {
               <li>• Children (7-16) and parents in private practice</li>
             </ul>
             <p className="text-secondary font-ubuntu-mono text-sm mt-3">
-              Received close clinical supervision, ensuring high-quality, evidence-based care
+              Provided close clinical supervision, ensuring high-quality, evidence-based care
             </p>
           </div>
         </div>
