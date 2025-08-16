@@ -122,9 +122,10 @@ body {
   }
   
   /* Scale down testimonial cat section more aggressively */
-  .fixed.bottom-8.right-8 {
+  .fixed.bottom-16.right-8 {
     transform: scale(0.8);
     transform-origin: bottom right;
+    bottom: 80px !important; /* Move up more on tablets */
   }
   
   /* Ensure popups don't overflow on tablets */
@@ -143,9 +144,10 @@ body {
   }
   
   /* Scale down testimonial cat section even more for phones */
-  .fixed.bottom-8.right-8 {
+  .fixed.bottom-16.right-8 {
     transform: scale(0.6);
     transform-origin: bottom right;
+    bottom: 100px !important; /* Move up even more on phones */
   }
   
   /* Make popups mobile-friendly */

@@ -114,7 +114,7 @@ export default function PopupWindow({ window: windowState, children, className }
       onDragEnd: () => {
         stopScrollSound();
       },
-      constraints,
+      constraints: undefined, // Disable constraints to prevent snapping
       elementRef: windowRef,
     }
   );
