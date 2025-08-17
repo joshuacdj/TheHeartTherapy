@@ -17,10 +17,10 @@ interface PopupWindowProps {
 
 export default function PopupWindow({ window: windowState, children, className }: PopupWindowProps) {
   const { dispatch } = useWindows();
-  const { playScroll } = useSoundEffects();
+
   const windowRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const scrollIntervalRef = useRef<NodeJS.Timeout | null>(null);
+
   const [constraints, setConstraints] = useState({
     minX: 0,
     maxX: 1200,
@@ -73,33 +73,6 @@ export default function PopupWindow({ window: windowState, children, className }
       return () => contentElement.removeEventListener('scroll', checkScrollIndicator);
     }
   }, [checkScrollIndicator, children]);
-
-  // Scroll sound management during drag
-  const startScrollSound = useCallback(() => {
-    if (scrollIntervalRef.current) return; // Already playing
-    
-    // Play immediately
-    playScroll();
-    
-    // Then play every 500ms while dragging (0.5 second delay)
-    scrollIntervalRef.current = setInterval(() => {
-      playScroll();
-    }, 500);
-  }, [playScroll]);
-
-  const stopScrollSound = useCallback(() => {
-    if (scrollIntervalRef.current) {
-      clearInterval(scrollIntervalRef.current);
-      scrollIntervalRef.current = null;
-    }
-  }, []);
-
-  // Cleanup scroll sound on unmount
-  useEffect(() => {
-    return () => {
-      stopScrollSound();
-    };
-  }, [stopScrollSound]);
   
   const { position, isDragging, handleMouseDown, handleTouchStart } = useDragAndDrop(
     windowState.position,
@@ -109,10 +82,6 @@ export default function PopupWindow({ window: windowState, children, className }
       },
       onDragStart: () => {
         dispatch({ type: 'FOCUS_WINDOW', windowId: windowState.id });
-        startScrollSound();
-      },
-      onDragEnd: () => {
-        stopScrollSound();
       },
       constraints: undefined, // Disable constraints to prevent snapping
       elementRef: windowRef,
