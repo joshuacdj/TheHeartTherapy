@@ -6,16 +6,40 @@ export const content = {
   about: {
     greeting: 'Hello there! :)',
     name: "I'm Hanyu...",
-    description: `Hanyu was born and raised in Singapore and holds a Master of Counselling as well as a Postgraduate Diploma in Counselling Psychology. She has experience in providing counselling in local secondary schools, tertiary institutions, international schools, and private practice settings, gaining valuable insight into the social, emotional, and needs of individuals from adolescence through young adulthood. Her experience has shaped a grounded, client-centred approach that balances emotional support with practical strategies for personal growth.
+    description: `I was born and raised in Singapore, and hold a Master of Counselling as well as a Postgraduate Diploma in Counselling Psychology. Over the years, I've had the privilege of working in local secondary schools, tertiary institutions, international schools, and private practice. These experiences have given me meaningful insight into the social, emotional, and developmental needs of clients from adolescence through young adulthood, and have shaped my grounded, client-centred approach.
 
-Hanyu brings a warm and nurturing presence into her work, creating a space where clients feel genuinely seen, heard, and safe. With patience and an open heart, she supports each client at their own pace, listening deeply and without judgment. She believes in meeting clients where they are, and gently guiding them to recognise their own strengths, reflect on their experiences, and develop into a fuller sense of who they are. For Hanyu, counselling is a process of walking alongside someone, helping them feel less alone, and reminding them that they have the strength and capacity to move forward.`,
-    approach: {
-      title: 'My Approach:',
-      description: 'Collaborative, client-centered therapy with a warm and conversational style to explore your personal strengths whilst developing practical strategies.',
-    },
+In our sessions, I bring warmth and a calm, supportive presence to the therapeutic space. My hope is for clients to feel truly seen, heard, and safe. With patience and genuine care, I walk alongside each person at their own pace, listening deeply, without judgment, and offering both comfort and practical guidance along the way.
+
+At the heart of my practice is the belief that counselling is not about "fixing" someone, but about gently guiding them to recognise their strengths, reflect on their experiences, and grow into a fuller sense of who they are. For me, it is a privilege to be part of this journey: to help someone feel less alone, and to remind them that they already carry the strength and capacity to move forward.`,
     specialization: {
-      title: 'I Specialize In:',
-      description: 'Stress & anxiety management, emotional regulation, relationship challenges, workplace pressures, and career transitions.',
+      title: 'Specialisations',
+      description: `Adults (26–35 years) – supporting clients in work or further studies with career development, workplace stress, relationship challenges, life transitions, goal setting, and personal growth.
+
+Young adults (18–25 years) – guiding clients in university or early career stages through academic or workplace pressures, time and stress management, decision-making, building independence, relationships, motivation, and navigating life transitions.
+
+Adolescents and teenagers (10–18 years) – supporting adolescents and teenagers through school challenges, peer and family relationships, self-esteem, identity exploration, stress, exam pressures, and developing coping skills.
+
+Emotional and social wellbeing – helping clients across all ages manage stress, anxiety, anger, frustration, sadness, self-confidence, friendships, relationships, personal growth, and other areas of life that matter to my clients.
+
+Personal challenges in work or academic settings – assisting clients to develop practical strategies, strengthen problem-solving skills, and build on existing strengths to manage challenges effectively.`,
+    },
+    approach: {
+      title: 'My Approach',
+      description: 'I take a collaborative, client-centred approach, creating a warm and conversational space where you feel safe to explore your experiences. Together, we focus on your strengths and resources, building on what\'s already working in your life. I draw on approaches such as Motivational Interviewing (MI), Solution-Focused Brief Therapy (SFBT), Person-Centred Therapy (PCT), and Cognitive Behavioural Therapy (CBT), using techniques like reframing and practical strategies to support growth in ways that feel meaningful and manageable for you.',
+    },
+    qualifications: {
+      title: 'Qualifications & Credentials',
+      education: `Education
+• Master of Counselling, Executive Counselling & Training Academy (ECTA)
+• Post Graduate Diploma in Counselling Psychology, College of Allied Educators
+• BSc in Business Management`,
+      professional: `Professional Memberships
+• Provisional Clinical Member (PCM), Singapore Association for Counselling (SAC)`,
+      training: `Specialized Training
+• Choice Theory Reality Therapy (CTRT) – Basic Intensive Training (William Glasser Institute Singapore)
+• Acceptance & Commitment Therapy (ACT) (Certification)`,
+      commitment: `Commitment to Excellence
+Committed to continuous learning through training, research, and professional development to ensure high-quality care for my clients`,
     },
   },
   faq: [
@@ -42,8 +66,8 @@ Hanyu brings a warm and nurturing presence into her work, creating a space where
   ],
   fees: {
     price: 'SGD120 Per Session (60mins)',
-    question: 'WHY DO THERAPY SESSIONS COST SGD 120?',
-    answer: 'Therapy is an investment in your wellbeing - Your fee covers not just our time together, but also my preparation and effort for each session.',
+    question: 'Why Do Therapy Sessions Cost SGD 120?',
+    answer: 'Therapy is an investment in your wellbeing. The fee reflects not just the time we spend together, but also the preparation, care, and expertise I bring to each session.',
     benefits: [
       {
         title: '1. Tailored Support',
@@ -51,19 +75,19 @@ Hanyu brings a warm and nurturing presence into her work, creating a space where
       },
       {
         title: '2. Professional Expertise',
-        description: 'I hold a Master of Counselling and have worked with over 100 clients aged 7 to 35, (mainly 15 - 35), addressing stress, anxiety, relationships, and work-life balance.',
+        description: 'I bring my professional qualifications and experience to provide guidance and strategies that help you navigate stress, anxiety, relationships, and the pressures of work, school, or daily life, always tailoring my approach to your unique needs.',
       },
       {
         title: '3. Practical Tools for Real Life',
-        description: "You'll walk away with actionable strategies that fit your life.",
+        description: "You'll walk away with actionable strategies and coping methods that can be applied beyond our sessions, helping you make meaningful progress.",
       },
       {
         title: '4. Safe & Judgement-Free Space',
         description: 'Our sessions are confidential, supportive and built on trust.',
       },
       {
-        title: '5. Continuous Growth',
-        description: 'I stay committed to delivering evidence-based care through ongoing training and clinical supervision',
+        title: '5. Commitment to Growth',
+        description: 'I stay updated with evidence-based practices through ongoing training and supervision, ensuring that the care you receive is thoughtful, effective, and tailored to you.',
       },
     ],
     conclusion: "Your mental health is worth it. Let's take this step together.",
