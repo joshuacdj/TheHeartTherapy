@@ -2,6 +2,8 @@
 
 Nextjs website done for a professional client with interactable pop-up windows and sound effects for UX requirements.
 
+Check it out on https://thehearttherapy.com/ on both desktop and mobile devices!
+
 ## Desktops:
 
 ## 1. Home
